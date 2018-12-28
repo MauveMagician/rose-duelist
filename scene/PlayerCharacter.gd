@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const FLOOR_NORMAL = Vector2(0,-1)
-const GRAVITY_SPEED = -25
-export var verticalSpeed = -700
+const GRAVITY_SPEED = -40
+export var verticalSpeed = -1000
 export var horizontalSpeed = 500
 export var dashSpeed = 1000
 var motion = Vector2()
@@ -37,11 +37,13 @@ func get_input():
 	else:
 		motion.x = 0
 	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or (dashing and not airdash):
+		if is_on_floor():
 			motion.y = verticalSpeed
 			if dashing:
 				gravity = true
-
+	if Input.is_action_just_released("jump"):
+		if motion.y < GRAVITY_SPEED:
+			motion.y = GRAVITY_SPEED
 
 func _physics_process(delta):
 	if gravity:
