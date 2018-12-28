@@ -116,6 +116,13 @@ wait_time = 0.1
 one_shot = true
 autostart = false
 
+[node name="DashCooldown" type="Timer" parent="PlayerCharacter" index="4"]
+
+process_mode = 1
+wait_time = 0.15
+one_shot = true
+autostart = false
+
 [connection signal="body_entered" from="WrapAreaW" to="." method="_on_WrapAreaW_body_entered"]
 
 [connection signal="body_entered" from="WrapAreaE" to="." method="_on_WrapAreaE_body_entered"]
@@ -123,5 +130,7 @@ autostart = false
 [connection signal="timeout" from="PlayerCharacter/DashTiming" to="PlayerCharacter" method="_on_DashTiming_timeout"]
 
 [connection signal="timeout" from="PlayerCharacter/DashStopping" to="PlayerCharacter" method="_on_DashStopping_timeout"]
+
+[connection signal="timeout" from="PlayerCharacter/DashCooldown" to="PlayerCharacter" method="_on_DashCooldown_timeout"]
 
 

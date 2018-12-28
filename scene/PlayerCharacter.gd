@@ -10,34 +10,39 @@ var direction = Vector2()
 var dashing = false
 var airdash = false
 var gravity = true
+var facing = -1
+var dashCooldown = false
 
 func _ready():
 	pass
 	
 func dash():
+	dashCooldown = true
 	dashing = true
 	gravity = false
 	$DashTiming.start()
 
 func get_input():
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and not dashCooldown:
 		if is_on_floor():
 			airdash = false
 			direction.y = 0
 		else:
 			airdash = true
-			if Input.is_action_pressed("ui_up"):
-				direction = Vector2(0,-1)
-			elif Input.is_action_pressed("ui_down"):
-				direction = Vector2(0,1)
-			else:
-				direction.y = 0
+		if Input.is_action_pressed("ui_up"):
+			direction = Vector2(0,-1)
+		elif Input.is_action_pressed("ui_down"):
+			direction = Vector2(0,1)
+		else:
+			direction.y = 0
 		dash()
 	if Input.is_action_pressed("ui_right"):
 		direction.x = 1
+		facing = 1
 		motion.x = horizontalSpeed
 	elif Input.is_action_pressed("ui_left"):
 		direction.x = -1
+		facing = -1
 		motion.x = -horizontalSpeed
 	else:
 		motion.x = 0
@@ -47,6 +52,8 @@ func get_input():
 	if Input.is_action_just_released("jump"):
 		if motion.y < GRAVITY_SPEED:
 			motion.y = GRAVITY_SPEED
+	if direction == Vector2(0,0):
+			direction = facing * Vector2(1,0)
 
 func _physics_process(delta):
 	if gravity:
@@ -54,7 +61,7 @@ func _physics_process(delta):
 	if dashing:
 		motion = direction * dashSpeed
 	elif not $DashStopping.is_stopped():
-		motion.x += direction.x * dashSpeed/100
+		motion.x += direction.x * dashSpeed/50
 	else:
 		get_input()
 	motion = move_and_slide(motion, FLOOR_NORMAL)
@@ -66,4 +73,7 @@ func _on_DashTiming_timeout():
 	$DashStopping.start()
 
 func _on_DashStopping_timeout():
-	pass
+	$DashCooldown.start()
+
+func _on_DashCooldown_timeout():
+	dashCooldown = false
