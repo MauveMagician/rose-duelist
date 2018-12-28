@@ -27,20 +27,22 @@ func get_input():
 			airdash = false
 		else:
 			airdash = true
+			if Input.is_action_pressed("ui_up"):
+				direction.y = -1
+			elif Input.is_action_pressed("ui_down"):
+				direction.y = 1
 		dash()
 	if Input.is_action_pressed("ui_right"):
-		direction = Vector2(1,0)
+		direction.x = 1
 		motion.x = horizontalSpeed
 	elif Input.is_action_pressed("ui_left"):
-		direction = Vector2(-1,0)
+		direction.x = -1
 		motion.x = -horizontalSpeed
 	else:
 		motion.x = 0
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
 			motion.y = verticalSpeed
-			if dashing:
-				gravity = true
 	if Input.is_action_just_released("jump"):
 		if motion.y < GRAVITY_SPEED:
 			motion.y = GRAVITY_SPEED
