@@ -91,6 +91,7 @@ script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 verticalSpeed = -700
 horizontalSpeed = 500
+dashSpeed = 1000
 
 [node name="Sprite" type="Sprite" parent="PlayerCharacter" index="0"]
 
