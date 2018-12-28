@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scene/Game.gd" type="Script" id=1]
+[ext_resource path="res://scene/PlayerCharacter.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 30 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 180, 32 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 180, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 30 )
+
+[node name="Game" type="Node" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="Ground" type="StaticBody2D" parent="." index="0"]
+
+editor/display_folded = true
+position = Vector2( 505, 570 )
+scale = Vector2( 19.2188, 1 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="WrapAreaW" type="Area2D" parent="." index="1"]
+
+position = Vector2( -60, 270 )
+scale = Vector2( 1, 8.46875 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapAreaW" index="0"]
+
+position = Vector2( -170, 0 )
+shape = SubResource( 2 )
+
+[node name="WrapAreaE" type="Area2D" parent="." index="2"]
+
+position = Vector2( 1100, 270 )
+scale = Vector2( 1, 8.46875 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapAreaE" index="0"]
+
+position = Vector2( 150, 0 )
+shape = SubResource( 3 )
+
+[node name="PlayerCharacter" type="KinematicBody2D" parent="." index="3"]
+
+position = Vector2( 24, 24 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+verticalSpeed = -700
+horizontalSpeed = 500
+
+[node name="Sprite" type="Sprite" parent="PlayerCharacter" index="0"]
+
+texture = ExtResource( 3 )
+
+[node name="CollisionWithGround" type="CollisionShape2D" parent="PlayerCharacter" index="1"]
+
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="DashTiming" type="Timer" parent="PlayerCharacter" index="2"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[node name="DashStopping" type="Timer" parent="PlayerCharacter" index="3"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[connection signal="body_entered" from="WrapAreaW" to="." method="_on_WrapAreaW_body_entered"]
+
+[connection signal="body_entered" from="WrapAreaE" to="." method="_on_WrapAreaE_body_entered"]
+
+[connection signal="timeout" from="PlayerCharacter/DashTiming" to="PlayerCharacter" method="_on_DashTiming_timeout"]
+
+[connection signal="timeout" from="PlayerCharacter/DashStopping" to="PlayerCharacter" method="_on_DashStopping_timeout"]
+
+
