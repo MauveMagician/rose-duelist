@@ -15,8 +15,6 @@ func _ready():
 	pass
 	
 func dash():
-	motion.y = 0
-	motion.x = 0
 	dashing = true
 	gravity = false
 	$DashTiming.start()
@@ -25,12 +23,15 @@ func get_input():
 	if Input.is_action_just_pressed("dash"):
 		if is_on_floor():
 			airdash = false
+			direction.y = 0
 		else:
 			airdash = true
 			if Input.is_action_pressed("ui_up"):
-				direction.y = -1
+				direction = Vector2(0,-1)
 			elif Input.is_action_pressed("ui_down"):
-				direction.y = 1
+				direction = Vector2(0,1)
+			else:
+				direction.y = 0
 		dash()
 	if Input.is_action_pressed("ui_right"):
 		direction.x = 1
@@ -51,10 +52,9 @@ func _physics_process(delta):
 	if gravity:
 		motion.y -= GRAVITY_SPEED
 	if dashing:
-		motion.x = direction.x * dashSpeed
-		motion.y = direction.y * dashSpeed
+		motion = direction * dashSpeed
 	elif not $DashStopping.is_stopped():
-		motion.x += direction.x * 10
+		motion.x += direction.x * dashSpeed/100
 	else:
 		get_input()
 	motion = move_and_slide(motion, FLOOR_NORMAL)
