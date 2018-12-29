@@ -12,10 +12,14 @@ var airdash = false
 var gravity = true
 var facing = -1
 var dashCooldown = false
+var fireCooldown = false
 
 func _ready():
 	pass
-	
+
+func hit():
+	pass
+
 func dash():
 	dashCooldown = true
 	dashing = true
@@ -23,6 +27,13 @@ func dash():
 	$DashTiming.start()
 
 func get_input():
+	if Input.is_action_just_pressed("fire") and not fireCooldown:
+		var new = Preloader.bullet.instance()
+		new.position = $GunPivot/Gun.global_position
+		new.rotation = $GunPivot.global_rotation
+		get_parent().add_child(new)
+		$FireCooldown.start()
+		fireCooldown = true
 	if Input.is_action_just_pressed("dash") and not dashCooldown:
 		if is_on_floor():
 			airdash = false
@@ -37,10 +48,12 @@ func get_input():
 			direction.y = 0
 		dash()
 	if Input.is_action_pressed("ui_right"):
+		$GunPivot.rotation_degrees = 0
 		direction.x = 1
 		facing = 1
 		motion.x = horizontalSpeed
 	elif Input.is_action_pressed("ui_left"):
+		$GunPivot.rotation_degrees = 180
 		direction.x = -1
 		facing = -1
 		motion.x = -horizontalSpeed
@@ -77,3 +90,6 @@ func _on_DashStopping_timeout():
 
 func _on_DashCooldown_timeout():
 	dashCooldown = false
+
+func _on_FireCooldown_timeout():
+	fireCooldown = false
