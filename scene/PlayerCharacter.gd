@@ -17,6 +17,12 @@ var fireCooldown = false
 func _ready():
 	pass
 
+func correct_rotation():
+	if facing == -1:
+		return 180
+	else:
+		return 0
+
 func hit():
 	pass
 
@@ -31,6 +37,10 @@ func get_input():
 		var new = Preloader.bullet.instance()
 		new.position = $GunPivot/Gun.global_position
 		new.rotation = $GunPivot.global_rotation
+		var flash = Preloader.muzzleFlash.instance()
+		flash.position = $GunPivot/Gun.global_position
+		flash.rotation = $GunPivot.global_rotation
+		get_parent().add_child(flash)
 		get_parent().add_child(new)
 		$FireCooldown.start()
 		fireCooldown = true
@@ -47,15 +57,24 @@ func get_input():
 		else:
 			direction.y = 0
 		dash()
+	if Input.is_action_pressed("ui_up"):
+		$GunPivot.rotation_degrees = -90
+	elif Input.is_action_pressed("ui_down"):
+		if not is_on_floor():
+			$GunPivot.rotation_degrees = +90
+		else:
+			$GunPivot.rotation_degrees = correct_rotation()
+	else:
+		$GunPivot.rotation_degrees = correct_rotation()
 	if Input.is_action_pressed("ui_right"):
-		$GunPivot.rotation_degrees = 0
 		direction.x = 1
 		facing = 1
+		$GunPivot.rotation_degrees = correct_rotation()
 		motion.x = horizontalSpeed
 	elif Input.is_action_pressed("ui_left"):
-		$GunPivot.rotation_degrees = 180
 		direction.x = -1
 		facing = -1
+		$GunPivot.rotation_degrees = correct_rotation()
 		motion.x = -horizontalSpeed
 	else:
 		motion.x = 0
@@ -66,7 +85,8 @@ func get_input():
 		if motion.y < GRAVITY_SPEED:
 			motion.y = GRAVITY_SPEED
 	if direction == Vector2(0,0):
-			direction = facing * Vector2(1,0)
+		direction = facing * Vector2(1,0)
+		$GunPivot.rotation_degrees = correct_rotation()
 
 func _physics_process(delta):
 	if gravity:
@@ -93,3 +113,11 @@ func _on_DashCooldown_timeout():
 
 func _on_FireCooldown_timeout():
 	fireCooldown = false
+
+func _on_SlowdownArea_area_entered(area):
+	if area != $SlowdownArea and area.name == "SlowdownArea":
+		Engine.time_scale = 0.5
+
+func _on_SlowdownArea_area_exited(area):
+	if area != $SlowdownArea and area.name == "SlowdownArea":
+		Engine.time_scale = 1

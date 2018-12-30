@@ -11,18 +11,23 @@ func _ready():
 func _physics_process(delta):
 	var new = Preloader.trail.instance()
 	new.global_position = self.global_position
+	new.global_rotation = self.global_rotation
 	get_parent().add_child(new)
 	forward_motion = Vector2(1,0).rotated(rotation) * speed
 	forward_motion = move_and_slide(forward_motion)
 
 func explode():
-	pass
+	queue_free()
 
 func _on_Hurtbox_body_entered(body):
 	if body == self:
 		return
-	if body.has_method("hit"):
+	elif body.has_method("hit"):
+		print("hit")
 		body.hit()
-		queue_free()
+		explode()
 	elif body.has_method("explode"):
-		queue_free()
+		explode()
+		body.explode()
+	elif body is StaticBody2D:
+		explode()
