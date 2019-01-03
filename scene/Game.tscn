@@ -1,7 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scene/Game.gd" type="Script" id=1]
-[ext_resource path="res://scene/PlayerCharacter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/ScreenShake.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/PlayerCharacter2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/PlayerCharacter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprite/curtain.png" type="Texture" id=5]
+[ext_resource path="res://sprite/skybox-clear.png" type="Texture" id=6]
+[ext_resource path="res://sprite/block.png" type="Texture" id=7]
+[ext_resource path="res://sprite/floor.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -104,9 +110,7 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( 150, 0 )
 shape = SubResource( 4 )
 
-[node name="PlayerCharacter" parent="." index="4" instance=ExtResource( 2 )]
-
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 
 position = Vector2( 510, 290 )
 anchor_mode = 1
@@ -132,6 +136,47 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
+
+[node name="ScreenShake" parent="Camera2D" index="0" instance=ExtResource( 2 )]
+
+[node name="PlayerCharacter2" parent="." index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 770, 490 )
+
+[node name="PlayerCharacter" parent="." index="6" instance=ExtResource( 4 )]
+
+position = Vector2( 230, 490 )
+
+[node name="Curatin" type="Sprite" parent="." index="7"]
+
+visible = false
+position = Vector2( 510, 290 )
+scale = Vector2( 0.333333, 0.333333 )
+z_index = -19
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Sky" type="Sprite" parent="." index="8"]
+
+position = Vector2( 500, 284.141 )
+scale = Vector2( 0.371094, 0.371094 )
+z_index = -20
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Floor" type="Sprite" parent="." index="9"]
+
+position = Vector2( 499.927, 588.429 )
+scale = Vector2( 4.07143, 0.371094 )
+texture = ExtResource( 7 )
+
+[node name="Wall" type="Sprite" parent="." index="10"]
+
+position = Vector2( 500, 206.015 )
+scale = Vector2( 0.371094, 0.371094 )
+z_index = -2
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Material", "Visibility", "Z Index" ]
 
 [connection signal="body_entered" from="WrapAreaW" to="." method="_on_WrapAreaW_body_entered"]
 

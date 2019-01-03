@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://particles-material/petals.tres" type="Material" id=1]
+[ext_resource path="res://sprite/rose_particle.png" type="Texture" id=2]
+[ext_resource path="res://scene/petals.gd" type="Script" id=3]
+
+[node name="petals" type="Particles2D"]
+
+position = Vector2( 517, 420 )
+emitting = true
+amount = 50
+lifetime = 10.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 1.0
+randomness = 0.0
+fixed_fps = 120
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+script = ExtResource( 3 )
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Transform" ]
+
+[node name="EmissionTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="EmissionTimer" to="." method="_on_EmissionTimer_timeout"]
+
+

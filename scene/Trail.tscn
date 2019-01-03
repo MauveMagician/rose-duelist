@@ -5,8 +5,8 @@
 
 [node name="Trail" type="Sprite"]
 
-position = Vector2( -20, -4.76837e-007 )
-scale = Vector2( 1.875, 1 )
+position = Vector2( -22, -4.76837e-007 )
+scale = Vector2( 1.125, 1 )
 z_index = -2
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -15,7 +15,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 [node name="Lifespam" type="Timer" parent="." index="0"]
 
 process_mode = 1
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 autostart = true
 

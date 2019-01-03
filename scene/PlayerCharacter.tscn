@@ -1,27 +1,26 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scene/PlayerCharacter.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://sprite/PlayerCharacter.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scene/CollisionWithBullets.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 20, 30 )
+extents = Vector2( 32, 30 )
 
-[sub_resource type="CircleShape2D" id=2]
-
-custom_solver_bias = 0.0
-radius = 160.0
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="PlayerCharacter" type="KinematicBody2D" index="0"]
+[sub_resource type="RectangleShape2D" id=3]
 
-position = Vector2( 128, 288 )
+custom_solver_bias = 0.0
+extents = Vector2( 24, 10 )
+
+[node name="PlayerCharacter" type="KinematicBody2D"]
+
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -32,9 +31,15 @@ verticalSpeed = -1000
 horizontalSpeed = 500
 dashSpeed = 1000
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
-texture = ExtResource( 2 )
+position = Vector2( 0, -10 )
+scale = Vector2( 2.5, 2.5 )
+z_index = 1
+frames = ExtResource( 2 )
+animation = "Idle"
+playing = true
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="CollisionWithGround" type="CollisionShape2D" parent="." index="1"]
 
@@ -71,31 +76,14 @@ autostart = false
 
 [node name="GunPivot" type="Position2D" parent="." index="6"]
 
-editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="Gun" type="Node2D" parent="GunPivot" index="0"]
 
-position = Vector2( 50, 0 )
+position = Vector2( 64, 0 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="SlowdownArea" type="Area2D" parent="." index="7"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 4
-collision_mask = 4
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SlowdownArea" index="0"]
-
-shape = SubResource( 2 )
-
-[node name="CollisionWithBullets" type="KinematicBody2D" parent="." index="8"]
+[node name="CollisionWithBullets" type="KinematicBody2D" parent="." index="7"]
 
 input_pickable = false
 collision_layer = 2
@@ -106,7 +94,41 @@ _sections_unfolded = [ "Collision", "collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionWithBullets" index="0"]
 
+shape = SubResource( 2 )
+
+[node name="Stomper" type="Area2D" parent="." index="8"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomper" index="0"]
+
+position = Vector2( 0, 24 )
 shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="Stomped" type="Area2D" parent="." index="9"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomped" index="0"]
+
+position = Vector2( -0.951319, -20.4735 )
+rotation = 3.14159
+shape = SubResource( 3 )
+one_way_collision = true
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="DashTiming" to="." method="_on_DashTiming_timeout"]
 
@@ -116,8 +138,6 @@ shape = SubResource( 3 )
 
 [connection signal="timeout" from="FireCooldown" to="." method="_on_FireCooldown_timeout"]
 
-[connection signal="area_entered" from="SlowdownArea" to="." method="_on_SlowdownArea_area_entered"]
-
-[connection signal="area_exited" from="SlowdownArea" to="." method="_on_SlowdownArea_area_exited"]
+[connection signal="area_entered" from="Stomped" to="." method="_on_Stomped_area_entered"]
 
 

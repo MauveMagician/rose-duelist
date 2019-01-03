@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scene/Bullet.gd" type="Script" id=1]
-[ext_resource path="res://sprite/Sprite-0001.png" type="Texture" id=2]
+[ext_resource path="res://sprite/boolit.png" type="Texture" id=2]
 [ext_resource path="res://scene/Trail.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -14,7 +14,7 @@ radius = 38.9999
 custom_solver_bias = 0.0
 extents = Vector2( 9.6, 9.6 )
 
-[node name="Bullet" type="KinematicBody2D" index="0"]
+[node name="Bullet" type="KinematicBody2D"]
 
 position = Vector2( -9.53674e-007, -9.53674e-007 )
 scale = Vector2( 0.3125, 0.3125 )
@@ -27,10 +27,10 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 5.72205e-006, 5.72205e-006 )
-scale = Vector2( 3.2, 3.2 )
+position = Vector2( 4.8, -1.06666 )
+scale = Vector2( 0.493333, 0.493333 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset", "Z Index" ]
+_sections_unfolded = [ "Offset", "Transform", "Visibility", "Z Index" ]
 
 [node name="Trail" parent="." index="1" instance=ExtResource( 3 )]
 
