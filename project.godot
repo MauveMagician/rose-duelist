@@ -22,6 +22,8 @@ DashSound="*res://scene/DashSound.tscn"
 
 [display]
 
+window/vsync/use_vsync=false
+window/energy_saving/keep_screen_on=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
