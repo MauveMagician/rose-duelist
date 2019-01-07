@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/kgnrat.wav-f88ac385db638e81d3f3b16f86322fcb.sample"
+
+[deps]
+
+source_file="res://sound/kgnrat.wav"
+dest_files=[ "res://.import/kgnrat.wav-f88ac385db638e81d3f3b16f86322fcb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

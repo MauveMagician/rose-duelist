@@ -13,7 +13,9 @@ func slow():
 	for c in get_children():
 		if c.has_method("hit"):
 			c.immune = true
-	Engine.time_scale = 0.125
+	Engine.time_scale = 0.25
+	yield(get_tree().create_timer(0.5), 'timeout')
+	Engine.time_scale = 1
 
 func shake(_duration = 0.1, _frequency = 50, _amplitude = 20, _priority=0):
 	$Camera2D/ScreenShake.start(_duration, _frequency, _amplitude, _priority)

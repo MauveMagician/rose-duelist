@@ -178,6 +178,14 @@ z_index = -2
 texture = ExtResource( 8 )
 _sections_unfolded = [ "Material", "Visibility", "Z Index" ]
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="11"]
+
+visible = false
+position = Vector2( 500, 284.141 )
+scale = Vector2( 0.371094, 0.371094 )
+color = Color( 1, 0.857666, 0.585938, 1 )
+_sections_unfolded = [ "Z Index" ]
+
 [connection signal="body_entered" from="WrapAreaW" to="." method="_on_WrapAreaW_body_entered"]
 
 [connection signal="body_entered" from="WrapAreaE" to="." method="_on_WrapAreaE_body_entered"]

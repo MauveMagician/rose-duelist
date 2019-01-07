@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Preloader="*res://scene/Preloader.tscn"
 Shot="*res://scene/Shot.tscn"
 DashSound="*res://scene/DashSound.tscn"
+BGMPlayer="*res://scene/BGMPlayer.tscn"
 
 [display]
 
