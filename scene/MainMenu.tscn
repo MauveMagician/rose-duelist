@@ -1,0 +1,253 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scene/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://sprite/arranged-flowers-love-54320.jpg" type="Texture" id=2]
+[ext_resource path="res://font/title-font.tres" type="Theme" id=3]
+[ext_resource path="res://scene/Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/FadeIn.tscn" type="PackedScene" id=5]
+
+[node name="TitleScreen" type="Control"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="." index="0"]
+
+modulate = Color( 1, 0, 0.937255, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 16.0
+margin_bottom = 94.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
+_sections_unfolded = [ "Visibility" ]
+
+[node name="ColorRect" type="ColorRect" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -50.0
+margin_bottom = -50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 0.784314 )
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility" ]
+
+[node name="Container" type="Container" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Label" type="Label" parent="Container" index="0"]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -202.0
+margin_top = -150.0
+margin_right = 218.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 3 )
+text = "Arena of Roses"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Menu" type="VBoxContainer" parent="." index="3"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -140.0
+margin_top = -244.0
+margin_right = 140.0
+margin_bottom = -51.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 25
+alignment = 0
+_sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Theme", "custom_constants" ]
+
+[node name="Button" parent="Menu" index="0" instance=ExtResource( 4 )]
+
+margin_right = 280.0
+margin_bottom = 25.0
+label_text = "Duel VS AI"
+
+[node name="Button2" parent="Menu" index="1" instance=ExtResource( 4 )]
+
+margin_top = 50.0
+margin_right = 280.0
+margin_bottom = 75.0
+label_text = "Duel VS Player"
+
+[node name="Button3" parent="Menu" index="2" instance=ExtResource( 4 )]
+
+margin_top = 100.0
+margin_right = 280.0
+margin_bottom = 125.0
+label_text = "Duel Options"
+
+[node name="Button4" parent="Menu" index="3" instance=ExtResource( 4 )]
+
+margin_top = 150.0
+margin_right = 280.0
+margin_bottom = 175.0
+scene_to_load = ""
+label_text = "Exit"
+
+[node name="Options" type="VBoxContainer" parent="." index="4"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -250.0
+margin_right = 111.0
+margin_bottom = -57.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 25
+alignment = 0
+_sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Theme", "custom_constants" ]
+
+[node name="fullscreen" parent="Options" index="0" instance=ExtResource( 4 )]
+
+margin_right = 183.0
+margin_bottom = 26.0
+label_text = "Fullscreen"
+
+[node name="back" parent="Options" index="1" instance=ExtResource( 4 )]
+
+margin_top = 51.0
+margin_right = 183.0
+margin_bottom = 77.0
+label_text = "Back"
+
+[node name="Playmode" type="VBoxContainer" parent="." index="5"]
+
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -197.0
+margin_top = -251.0
+margin_right = 236.0
+margin_bottom = -58.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 25
+alignment = 0
+_sections_unfolded = [ "Grow Direction", "Hint", "Margin", "Theme", "custom_constants" ]
+
+[node name="KBvsController" parent="Playmode" index="0" instance=ExtResource( 4 )]
+
+margin_right = 433.0
+margin_bottom = 26.0
+label_text = "Keyboard vs Controller"
+
+[node name="ControllervsController" parent="Playmode" index="1" instance=ExtResource( 4 )]
+
+margin_top = 51.0
+margin_right = 433.0
+margin_bottom = 77.0
+label_text = "Controller vs Controller"
+
+[node name="KBvsKB" parent="Playmode" index="2" instance=ExtResource( 4 )]
+
+margin_top = 102.0
+margin_right = 433.0
+margin_bottom = 128.0
+label_text = "Keyboard vs Keyboard"
+
+[node name="back" parent="Playmode" index="3" instance=ExtResource( 4 )]
+
+margin_top = 153.0
+margin_right = 433.0
+margin_bottom = 179.0
+label_text = "Back"
+
+[node name="FadeIn" parent="." index="6" instance=ExtResource( 5 )]
+
+_sections_unfolded = [ "Mouse", "Size Flags", "Theme" ]
+
+[connection signal="pressed" from="Menu/Button2" to="." method="_on_Button2_pressed"]
+
+[connection signal="pressed" from="Menu/Button3" to="." method="_on_Button3_pressed"]
+
+[connection signal="pressed" from="Menu/Button4" to="." method="_on_Button4_pressed"]
+
+[connection signal="pressed" from="Options/fullscreen" to="." method="_on_fullscreen_pressed"]
+
+[connection signal="pressed" from="Options/back" to="." method="_on_back_pressed"]
+
+[connection signal="pressed" from="Playmode/KBvsController" to="." method="_on_KBvsController_pressed"]
+
+[connection signal="pressed" from="Playmode/ControllervsController" to="." method="_on_ControllervsController_pressed"]
+
+[connection signal="pressed" from="Playmode/KBvsKB" to="." method="_on_KBvsKB_pressed"]
+
+[connection signal="pressed" from="Playmode/back" to="." method="_on_back_pressed"]
+
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]
+
+

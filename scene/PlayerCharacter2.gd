@@ -26,13 +26,14 @@ func correct_rotation():
 
 func hit():
 	if not immune:
-		print(self.name + " hit")
 		get_parent().slow()
 		get_parent().shake(0.5, 25, 25, 1)
 		var new = Preloader.petals.instance()
 		new.position = global_position
 		get_parent().add_child(new)
 		queue_free()
+	else:
+		pass
 
 func dash():
 	dashCooldown = true

@@ -1,0 +1,7 @@
+[gd_resource type="StreamTexture" format=2]
+
+[resource]
+
+flags = 4
+load_path = "res://.import/skybox-dusk.png-077966a6dd045d3b520bf5cb07fc61f4.stex"
+

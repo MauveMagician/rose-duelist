@@ -1,0 +1,376 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scene/CPU-character.gd" type="Script" id=1]
+[ext_resource path="res://sprite/PlayerCharacter.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scene/CollisionWithBullets.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 30 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 24, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="CPUCharacter" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform", "collision" ]
+verticalSpeed = -1000
+horizontalSpeed = 500
+dashSpeed = 1000
+
+[node name="Sprite" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( 0, -10 )
+scale = Vector2( 2.5, 2.5 )
+z_index = 1
+frames = ExtResource( 2 )
+animation = "Idle"
+playing = true
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="CollisionWithGround" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="DashTiming" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[node name="DashStopping" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[node name="DashCooldown" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.03
+one_shot = true
+autostart = false
+
+[node name="FireCooldown" type="Timer" parent="." index="5"]
+
+process_mode = 1
+wait_time = 0.4
+one_shot = true
+autostart = false
+
+[node name="GunPivot" type="Position2D" parent="." index="6"]
+
+_sections_unfolded = [ "Transform" ]
+
+[node name="Gun" type="Node2D" parent="GunPivot" index="0"]
+
+position = Vector2( 64, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionWithBullets" type="KinematicBody2D" parent="." index="7"]
+
+input_pickable = false
+collision_layer = 2
+collision_mask = 2
+collision/safe_margin = 0.08
+script = ExtResource( 3 )
+_sections_unfolded = [ "Collision", "collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionWithBullets" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="Stomper" type="Area2D" parent="." index="8"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 8
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomper" index="0"]
+
+position = Vector2( 0, 24 )
+shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="Stomped" type="Area2D" parent="." index="9"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 0.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 8
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomped" index="0"]
+
+position = Vector2( -0.951319, -20.4735 )
+rotation = 3.14159
+shape = SubResource( 3 )
+one_way_collision = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="AI_Areas" type="Node2D" parent="." index="10"]
+
+[node name="AreaUp" type="Area2D" parent="AI_Areas" index="0"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="up" type="CollisionShape2D" parent="AI_Areas/AreaUp" index="0"]
+
+position = Vector2( -3.29662, -529.628 )
+rotation = 1.5708
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaUp" index="1"]
+
+position = Vector2( 0, -60 )
+
+[node name="AreaLeft" type="Area2D" parent="AI_Areas" index="1"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="left" type="CollisionShape2D" parent="AI_Areas/AreaLeft" index="0"]
+
+position = Vector2( -530, 0 )
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaLeft" index="1"]
+
+position = Vector2( -60, 0 )
+
+[node name="AreaRight" type="Area2D" parent="AI_Areas" index="2"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="right" type="CollisionShape2D" parent="AI_Areas/AreaRight" index="0"]
+
+position = Vector2( 530, 0 )
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaRight" index="1"]
+
+position = Vector2( 60, 0 )
+
+[node name="AreaDown" type="Area2D" parent="AI_Areas" index="3"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Audio Bus", "Collision" ]
+
+[node name="down" type="CollisionShape2D" parent="AI_Areas/AreaDown" index="0"]
+
+position = Vector2( 0.236222, 529.592 )
+rotation = 1.5708
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaDown" index="1"]
+
+position = Vector2( 0, 60 )
+
+[node name="DownRight" type="Area2D" parent="AI_Areas" index="4"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="downRight" type="CollisionShape2D" parent="AI_Areas/DownRight" index="0"]
+
+position = Vector2( 375.02, 380.971 )
+rotation = 0.785398
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/DownRight" index="1"]
+
+position = Vector2( 50, 50 )
+
+[node name="AreaUpRight" type="Area2D" parent="AI_Areas" index="5"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="downRight" type="CollisionShape2D" parent="AI_Areas/AreaUpRight" index="0"]
+
+position = Vector2( 375.245, -377.116 )
+rotation = 2.35619
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaUpRight" index="1"]
+
+position = Vector2( 50, -50 )
+
+[node name="AreaDownLeft" type="Area2D" parent="AI_Areas" index="6"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="downLeft" type="CollisionShape2D" parent="AI_Areas/AreaDownLeft" index="0"]
+
+position = Vector2( -375.02, 380.999 )
+rotation = -0.785398
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaDownLeft" index="1"]
+
+position = Vector2( -50, 50 )
+
+[node name="AreaUpLeft" type="Area2D" parent="AI_Areas" index="7"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 3
+collision_mask = 3
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="upLeft" type="CollisionShape2D" parent="AI_Areas/AreaUpLeft" index="0"]
+
+position = Vector2( -382.335, -377.121 )
+rotation = -2.35619
+scale = Vector2( 49, 3 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Position2D" type="Position2D" parent="AI_Areas/AreaUpLeft" index="1"]
+
+position = Vector2( -50, -50 )
+
+[connection signal="timeout" from="DashTiming" to="." method="_on_DashTiming_timeout"]
+
+[connection signal="timeout" from="DashStopping" to="." method="_on_DashStopping_timeout"]
+
+[connection signal="timeout" from="DashCooldown" to="." method="_on_DashCooldown_timeout"]
+
+[connection signal="timeout" from="FireCooldown" to="." method="_on_FireCooldown_timeout"]
+
+[connection signal="area_entered" from="Stomped" to="." method="_on_Stomped_area_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaUp" to="." method="_on_AreaUp_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaLeft" to="." method="_on_AreaLeft_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaRight" to="." method="_on_AreaRight_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaDown" to="." method="_on_AreaDown_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/DownRight" to="." method="_on_DownRight_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaUpRight" to="." method="_on_AreaUpRight_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaDownLeft" to="." method="_on_AreaDownLeft_body_entered"]
+
+[connection signal="body_entered" from="AI_Areas/AreaUpLeft" to="." method="_on_AreaUpLeft_body_entered"]
+
+
