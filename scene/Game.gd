@@ -1,10 +1,14 @@
 extends Node
 
 func _ready():
+	var final = false
 	Engine.time_scale = 1
 	if(Preloader.score1 >= 2 or Preloader.score2 >= 2):
 		$Sky.texture = load("res://sprite/skybox-dusk.png")
 		$CanvasModulate.visible = true
+		if (not Catharsis.playing) and (Preloader.score1 == 2 and Preloader.score2 == 2):
+			BGMPlayer.stop()
+			final = true
 	var player1 = Preloader.player.instance()
 	player1.position = Vector2(230, 490)
 	player1.playerNumber = 1
@@ -23,6 +27,14 @@ func _ready():
 		if c.get("playerNumber") != null:
 			c.stop = true
 			c.connect("scattered", self, "_on_scattered", [c.playerNumber])
+	if final:
+		yield(get_tree().create_timer(1), 'timeout')
+		$UILayer/Control/c3.visible = false
+		Catharsis.play()
+		var finale = Preloader.finalscene.instance()
+		$UILayer/Control.add_child(finale)
+		yield(finale.get_child(2), 'timeout')
+		$UILayer/Control/c3.visible = true
 	yield(get_tree().create_timer(1), 'timeout')
 	$UILayer/Control/c3.visible = false
 	$UILayer/Control/c2.visible = true
@@ -78,10 +90,13 @@ func lose(arg):
 	if Preloader.score1 <= 2 and Preloader.score2 <= 2:
 		get_tree().change_scene("res://scene/Game.tscn")
 	else:
-		$FadeIn.show()
-		$FadeIn.fade_in()
+		$FadeInLayer/FadeIn.show()
+		$FadeInLayer/FadeIn.fade_in()
 		yield(get_tree().create_timer(2), 'timeout')
+		BGMPlayer.stop()
+		Catharsis.stop()
 		get_tree().change_scene("res://scene/MainMenu.tscn")
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

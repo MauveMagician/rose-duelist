@@ -7,6 +7,7 @@ var muzzleFlash
 var petals
 var cpuChar
 var player
+var finalscene
 var score1 = 0
 var score2 = 0
 
@@ -24,3 +25,4 @@ func _ready():
 	petals = preload("res://scene/petals.tscn")
 	cpuChar = preload("res://scene/CPU-character.tscn")
 	player = preload("res://scene/PlayerCharacter.tscn")
+	finalscene = preload("res://scene/Finalscene.tscn")

@@ -228,7 +228,7 @@ label_text = "Back"
 
 [node name="FadeIn" parent="." index="6" instance=ExtResource( 5 )]
 
-_sections_unfolded = [ "Mouse", "Size Flags", "Theme" ]
+_sections_unfolded = [ "Material", "Mouse", "Size Flags", "Theme", "Visibility" ]
 
 [connection signal="pressed" from="Menu/Button2" to="." method="_on_Button2_pressed"]
 

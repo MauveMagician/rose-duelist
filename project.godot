@@ -21,6 +21,7 @@ Shot="*res://scene/Shot.tscn"
 DashSound="*res://scene/DashSound.tscn"
 BGMPlayer="*res://scene/BGMPlayer.tscn"
 UnpauseManager="*res://scene/UnpauseManager.tscn"
+Catharsis="*res://scene/Catharsis.tscn"
 
 [display]
 

@@ -19,7 +19,7 @@ extents = Vector2( 10, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 24, 10 )
 
-[node name="PlayerCharacter" type="KinematicBody2D"]
+[node name="PlayerCharacter" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -34,7 +34,7 @@ dashSpeed = 1000
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 position = Vector2( 0, -10 )
-scale = Vector2( 2.5, 2.5 )
+scale = Vector2( 1.5, 1.5 )
 z_index = 1
 frames = ExtResource( 2 )
 animation = "Idle"

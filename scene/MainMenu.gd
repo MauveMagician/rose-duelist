@@ -3,6 +3,7 @@ extends Control
 var scene_path_to_load
 
 func _ready():
+	get_tree().get_root().set_disable_input(false)
 	$Menu/Button.grab_focus()
 	$Menu/Button.connect("pressed", self, "_on_Button_pressed", [$Menu/Button.scene_to_load])
 	Preloader.score1 = 0

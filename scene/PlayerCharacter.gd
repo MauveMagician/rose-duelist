@@ -54,10 +54,17 @@ func animate():
 			return "Airborn"
 		if Input.is_action_pressed("ui_right"):
 			$Sprite.flip_h = false
-			return "Idle"
+			if is_on_floor():
+				return "Walk"
+			else:
+				return "Idle"
 		elif Input.is_action_pressed("ui_left"):
 			$Sprite.flip_h = true
 			return "Idle"
+			if is_on_floor():
+				return "Walk"
+			else:
+				return "Idle"
 		elif Input.is_action_pressed("ui_up"):
 			return "Aim_up"
 		elif Input.is_action_pressed("ui_down") and not is_on_floor():

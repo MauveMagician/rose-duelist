@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scene/CPU-character.gd" type="Script" id=1]
-[ext_resource path="res://sprite/PlayerCharacter.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scene/PlayerCharacter2.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scene/CollisionWithBullets.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -22,9 +22,9 @@ extents = Vector2( 24, 10 )
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 6.32653, 10 )
 
-[node name="CPUCharacter" type="KinematicBody2D"]
+[node name="CPUCharacter" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -39,7 +39,7 @@ dashSpeed = 1000
 [node name="Sprite" type="AnimatedSprite" parent="." index="0"]
 
 position = Vector2( 0, -10 )
-scale = Vector2( 2.5, 2.5 )
+scale = Vector2( 1.5, 1.5 )
 z_index = 1
 frames = ExtResource( 2 )
 animation = "Idle"
@@ -145,7 +145,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="AreaUp" type="Area2D" parent="AI_Areas" index="0"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -159,7 +158,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="up" type="CollisionShape2D" parent="AI_Areas/AreaUp" index="0"]
 
-position = Vector2( -3.29662, -529.628 )
+position = Vector2( -2.34661, -347.228 )
 rotation = 1.5708
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
@@ -171,7 +170,6 @@ position = Vector2( 0, -60 )
 
 [node name="AreaLeft" type="Area2D" parent="AI_Areas" index="1"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -185,7 +183,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="left" type="CollisionShape2D" parent="AI_Areas/AreaLeft" index="0"]
 
-position = Vector2( -530, 0 )
+position = Vector2( -350, 0 )
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
 
@@ -195,7 +193,6 @@ position = Vector2( -60, 0 )
 
 [node name="AreaRight" type="Area2D" parent="AI_Areas" index="2"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -209,7 +206,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="right" type="CollisionShape2D" parent="AI_Areas/AreaRight" index="0"]
 
-position = Vector2( 530, 0 )
+position = Vector2( 350, 0 )
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
 
@@ -219,7 +216,6 @@ position = Vector2( 60, 0 )
 
 [node name="AreaDown" type="Area2D" parent="AI_Areas" index="3"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -233,7 +229,7 @@ _sections_unfolded = [ "Audio Bus", "Collision" ]
 
 [node name="down" type="CollisionShape2D" parent="AI_Areas/AreaDown" index="0"]
 
-position = Vector2( 0.236222, 529.592 )
+position = Vector2( 4.03621, 355.742 )
 rotation = 1.5708
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
@@ -245,7 +241,6 @@ position = Vector2( 0, 60 )
 
 [node name="DownRight" type="Area2D" parent="AI_Areas" index="4"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -259,7 +254,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="downRight" type="CollisionShape2D" parent="AI_Areas/DownRight" index="0"]
 
-position = Vector2( 375.02, 380.971 )
+position = Vector2( 245.929, 254.512 )
 rotation = 0.785398
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
@@ -271,7 +266,6 @@ position = Vector2( 50, 50 )
 
 [node name="AreaUpRight" type="Area2D" parent="AI_Areas" index="5"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -285,7 +279,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="downRight" type="CollisionShape2D" parent="AI_Areas/AreaUpRight" index="0"]
 
-position = Vector2( 375.245, -377.116 )
+position = Vector2( 248.445, -253.115 )
 rotation = 2.35619
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
@@ -297,7 +291,6 @@ position = Vector2( 50, -50 )
 
 [node name="AreaDownLeft" type="Area2D" parent="AI_Areas" index="6"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -311,7 +304,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="downLeft" type="CollisionShape2D" parent="AI_Areas/AreaDownLeft" index="0"]
 
-position = Vector2( -375.02, 380.999 )
+position = Vector2( -243.584, 253.085 )
 rotation = -0.785398
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )
@@ -323,7 +316,6 @@ position = Vector2( -50, 50 )
 
 [node name="AreaUpLeft" type="Area2D" parent="AI_Areas" index="7"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -337,7 +329,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="upLeft" type="CollisionShape2D" parent="AI_Areas/AreaUpLeft" index="0"]
 
-position = Vector2( -382.335, -377.121 )
+position = Vector2( -256.635, -245.371 )
 rotation = -2.35619
 scale = Vector2( 49, 3 )
 shape = SubResource( 4 )

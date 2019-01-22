@@ -1,21 +1,21 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scene/Game.gd" type="Script" id=1]
-[ext_resource path="res://font/FFFFORWA.TTF" type="DynamicFontData" id=2]
-[ext_resource path="res://sprite/rose_particle.png" type="Texture" id=3]
-[ext_resource path="res://scene/ScreenShake.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sprite/curtain.png" type="Texture" id=5]
-[ext_resource path="res://sprite/skybox-clear.png" type="Texture" id=6]
-[ext_resource path="res://sprite/block.png" type="Texture" id=7]
-[ext_resource path="res://sprite/floor.png" type="Texture" id=8]
-[ext_resource path="res://scene/FadeIn.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scene/FadeIn.tscn" type="PackedScene" id=2]
+[ext_resource path="res://font/FFFFORWA.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://sprite/rose_particle.png" type="Texture" id=4]
+[ext_resource path="res://scene/ScreenShake.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sprite/curtain.png" type="Texture" id=6]
+[ext_resource path="res://sprite/skybox-clear.png" type="Texture" id=7]
+[ext_resource path="res://sprite/block.png" type="Texture" id=8]
+[ext_resource path="res://sprite/floor.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 80
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
@@ -23,7 +23,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 size = 200
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -46,13 +46,23 @@ extents = Vector2( 180, 32 )
 custom_solver_bias = 0.0
 extents = Vector2( 180, 32 )
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 pause_mode = 2
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="UILayer" type="CanvasLayer" parent="." index="0"]
+[node name="FadeInLayer" type="CanvasLayer" parent="." index="0"]
+
+layer = 5
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="FadeIn" parent="FadeInLayer" index="0" instance=ExtResource( 2 )]
+
+[node name="UILayer" type="CanvasLayer" parent="." index="1"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -62,6 +72,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="WinnerScreen" type="Control" parent="UILayer" index="0"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -147,7 +158,7 @@ size_flags_vertical = 1
 visible = false
 position = Vector2( 44.7932, 110.374 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -156,7 +167,7 @@ _sections_unfolded = [ "Offset" ]
 visible = false
 position = Vector2( 120.603, 107.284 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Animation", "Offset" ]
 
@@ -165,7 +176,7 @@ _sections_unfolded = [ "Animation", "Offset" ]
 visible = false
 position = Vector2( 198.95, 107.087 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -174,7 +185,7 @@ _sections_unfolded = [ "Offset" ]
 visible = false
 position = Vector2( 277.596, 104.829 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -250,7 +261,7 @@ size_flags_vertical = 1
 visible = false
 position = Vector2( 37.783, 110.596 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -259,7 +270,7 @@ _sections_unfolded = [ "Offset" ]
 visible = false
 position = Vector2( 117.278, 107.757 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Animation", "Offset" ]
 
@@ -268,7 +279,7 @@ _sections_unfolded = [ "Animation", "Offset" ]
 visible = false
 position = Vector2( 196.15, 106.46 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -277,7 +288,7 @@ _sections_unfolded = [ "Offset" ]
 visible = false
 position = Vector2( 276.147, 107.401 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 flip_h = true
 _sections_unfolded = [ "Offset" ]
 
@@ -350,7 +361,6 @@ playback/speed = 1.0
 
 [node name="Control" type="Control" parent="UILayer" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -496,7 +506,7 @@ wait_time = 0.25
 one_shot = true
 autostart = false
 
-[node name="Ceiling" type="StaticBody2D" parent="." index="1"]
+[node name="Ceiling" type="StaticBody2D" parent="." index="2"]
 
 editor/display_folded = true
 position = Vector2( 510, -34 )
@@ -515,7 +525,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 shape = SubResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Ground" type="StaticBody2D" parent="." index="2"]
+[node name="Ground" type="StaticBody2D" parent="." index="3"]
 
 editor/display_folded = true
 position = Vector2( 510, 570 )
@@ -533,7 +543,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 shape = SubResource( 4 )
 
-[node name="WrapAreaW" type="Area2D" parent="." index="3"]
+[node name="WrapAreaW" type="Area2D" parent="." index="4"]
 
 editor/display_folded = true
 position = Vector2( -60, 270 )
@@ -554,7 +564,7 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( -170, 0 )
 shape = SubResource( 5 )
 
-[node name="WrapAreaE" type="Area2D" parent="." index="4"]
+[node name="WrapAreaE" type="Area2D" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( 1100, 270 )
@@ -575,7 +585,7 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( 150, 0 )
 shape = SubResource( 6 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
 
 editor/display_folded = true
 position = Vector2( 510, 290 )
@@ -603,48 +613,46 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="ScreenShake" parent="Camera2D" index="0" instance=ExtResource( 4 )]
+[node name="ScreenShake" parent="Camera2D" index="0" instance=ExtResource( 5 )]
 
-[node name="Curatin" type="Sprite" parent="." index="6"]
+[node name="Curatin" type="Sprite" parent="." index="7"]
 
 visible = false
 position = Vector2( 510, 290 )
 scale = Vector2( 0.333333, 0.333333 )
 z_index = -19
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Z Index" ]
 
-[node name="Sky" type="Sprite" parent="." index="7"]
+[node name="Sky" type="Sprite" parent="." index="8"]
 
 position = Vector2( 506.288, 293.687 )
 scale = Vector2( 0.371094, 0.371094 )
 z_index = -20
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="Floor" type="Sprite" parent="." index="8"]
+[node name="Floor" type="Sprite" parent="." index="9"]
 
 position = Vector2( 499.927, 588.429 )
 scale = Vector2( 4.07143, 0.371094 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
-[node name="Wall" type="Sprite" parent="." index="9"]
+[node name="Wall" type="Sprite" parent="." index="10"]
 
 position = Vector2( 500, 206.015 )
 scale = Vector2( 0.371094, 0.371094 )
 z_index = -2
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 _sections_unfolded = [ "Material", "Visibility", "Z Index" ]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." index="10"]
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="11"]
 
 visible = false
 position = Vector2( 500, 284.141 )
 scale = Vector2( 0.371094, 0.371094 )
 color = Color( 1, 0.857666, 0.585938, 1 )
 _sections_unfolded = [ "Z Index" ]
-
-[node name="FadeIn" parent="." index="11" instance=ExtResource( 9 )]
 
 [connection signal="timeout" from="UILayer/Control/Firetimer" to="." method="_on_Firetimer_timeout"]
 
