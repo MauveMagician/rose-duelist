@@ -12,11 +12,13 @@ func _ready():
 	var player1 = Preloader.player.instance()
 	player1.position = Vector2(230, 490)
 	player1.playerNumber = 1
+	player1.setController(Preloader.p1Control)
 	self.add_child(player1)
 	if Preloader.current_mode != "VS_CPU":
 		var player2 = Preloader.player.instance()
 		player2.position = Vector2(800, 490)
 		player2.playerNumber = 2
+		player2.setController(Preloader.p2Control)
 		self.add_child(player2)
 	else:
 		var playercpu = Preloader.cpuChar.instance()
@@ -28,12 +30,13 @@ func _ready():
 			c.stop = true
 			c.connect("scattered", self, "_on_scattered", [c.playerNumber])
 	if final:
+		$UILayer/Control/c3.visible = false
 		yield(get_tree().create_timer(1), 'timeout')
 		$UILayer/Control/c3.visible = false
 		Catharsis.play()
 		var finale = Preloader.finalscene.instance()
 		$UILayer/Control.add_child(finale)
-		yield(finale.get_child(2), 'timeout')
+		yield(get_tree().create_timer(15), 'timeout')
 		$UILayer/Control/c3.visible = true
 	yield(get_tree().create_timer(1), 'timeout')
 	$UILayer/Control/c3.visible = false
@@ -93,9 +96,7 @@ func lose(arg):
 		$FadeInLayer/FadeIn.show()
 		$FadeInLayer/FadeIn.fade_in()
 		yield(get_tree().create_timer(2), 'timeout')
-		BGMPlayer.stop()
-		Catharsis.stop()
-		get_tree().change_scene("res://scene/MainMenu.tscn")
+		get_tree().change_scene("res://scene/WinScreen.tscn")
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -110,7 +111,7 @@ func slow():
 	yield(get_tree().create_timer(0.5), 'timeout')
 	Engine.time_scale = 1
 
-func shake(_duration = 0.1, _frequency = 50, _amplitude = 20, _priority=0):
+func shake(_duration = 0.1, _frequency = 25, _amplitude = 10, _priority=0):
 	$Camera2D/ScreenShake.start(_duration, _frequency, _amplitude, _priority)
 
 func _on_WrapAreaW_body_entered(body):

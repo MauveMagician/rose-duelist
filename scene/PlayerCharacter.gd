@@ -17,11 +17,79 @@ var fireCooldown = false
 var anim = "Idle"
 var playerNumber = 1
 var stop = false
+var c_up
+var c_down
+var c_left
+var c_right
+var c_fire
+var c_jump
+var c_dash
 
 signal scattered
 
 func _ready():
 	pass
+
+func setController(control_type):
+	if Preloader.current_mode == "VS_CPU":
+		for s in InputMap.get_action_list("ui_up_2"):
+			InputMap.action_add_event("ui_up", s)
+		for s in InputMap.get_action_list("ui_down_2"):
+			InputMap.action_add_event("ui_down", s)
+		for s in InputMap.get_action_list("ui_left_2"):
+			InputMap.action_add_event("ui_left", s)
+		for s in InputMap.get_action_list("ui_right_2"):
+			InputMap.action_add_event("ui_right", s)
+		for s in InputMap.get_action_list("jump_2"):
+			InputMap.action_add_event("jump", s)
+		for s in InputMap.get_action_list("dash_2"):
+			InputMap.action_add_event("dash", s)
+		for s in InputMap.get_action_list("fire_2"):
+			InputMap.action_add_event("fire", s)
+	if playerNumber == 2:
+		$Sprite.frames = load("res://scene/PlayerCharacter2.tres")
+		facing = -1
+		$Sprite.flip_h = true
+		$GunPivot.rotation_degrees = correct_rotation()
+	if control_type == "keyboard1":
+		if Preloader.p2Control == "keyboard2":
+			c_up = "ui_up_1_alt"
+			c_down = "ui_down_1_alt"
+			c_left = "ui_left_1_alt"
+			c_right = "ui_right_1_alt"
+			c_fire = "fire_1_alt"
+		else:
+			c_up = "ui_up"
+			c_down = "ui_down"
+			c_left = "ui_left"
+			c_right = "ui_right"
+			c_fire = "fire"
+		c_jump = "jump"
+		c_dash = "dash"
+	elif control_type == "gamepad1":
+		c_up = "ui_up_2"
+		c_down = "ui_down_2"
+		c_left = "ui_left_2"
+		c_right = "ui_right_2"
+		c_fire = "fire_2"
+		c_jump = "jump_2"
+		c_dash = "dash_2"
+	if control_type == "keyboard2":
+		c_up = "ui_up_3"
+		c_down = "ui_down_3"
+		c_left = "ui_left_3"
+		c_right = "ui_right_3"
+		c_fire = "fire_3"
+		c_jump = "jump_3"
+		c_dash = "dash_3"
+	elif control_type == "gamepad2":
+		c_up = "ui_up_4"
+		c_down = "ui_down_4"
+		c_left = "ui_left_4"
+		c_right = "ui_right_4"
+		c_fire = "fire_4"
+		c_jump = "jump_4"
+		c_dash = "dash_4"
 
 func correct_rotation():
 	if facing == -1:
@@ -52,22 +120,21 @@ func animate():
 	if not stop:
 		if dashing:
 			return "Airborn"
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed(c_right):
 			$Sprite.flip_h = false
 			if is_on_floor():
 				return "Walk"
 			else:
 				return "Idle"
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed(c_left):
 			$Sprite.flip_h = true
-			return "Idle"
 			if is_on_floor():
 				return "Walk"
 			else:
 				return "Idle"
-		elif Input.is_action_pressed("ui_up"):
+		elif Input.is_action_pressed(c_up):
 			return "Aim_up"
-		elif Input.is_action_pressed("ui_down") and not is_on_floor():
+		elif Input.is_action_pressed(c_down) and not is_on_floor():
 			return "Aim_down"
 		else:
 			return "Idle"
@@ -75,7 +142,7 @@ func animate():
 
 func get_input():
 	if not stop:
-		if Input.is_action_just_pressed("fire") and not fireCooldown:
+		if Input.is_action_just_pressed(c_fire) and not fireCooldown:
 			Shot.play()
 			var new = Preloader.bullet.instance()
 			new.position = $GunPivot/Gun.global_position
@@ -88,45 +155,45 @@ func get_input():
 			get_parent().shake()
 			$FireCooldown.start()
 			fireCooldown = true
-		if Input.is_action_just_pressed("dash") and not dashCooldown:
+		if Input.is_action_just_pressed(c_dash) and not dashCooldown:
 			DashSound.play()
 			if is_on_floor():
 				airdash = false
 				direction.y = 0
 			else:
 				airdash = true
-			if Input.is_action_pressed("ui_up"):
+			if Input.is_action_pressed(c_up):
 				direction = Vector2(0,-1)
-			elif Input.is_action_pressed("ui_down"):
+			elif Input.is_action_pressed(c_down):
 				direction = Vector2(0,1)
 			else:
 				direction.y = 0
 			dash()
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed(c_up):
 			$GunPivot.rotation_degrees = -90
-		elif Input.is_action_pressed("ui_down"):
+		elif Input.is_action_pressed(c_down):
 			if not is_on_floor():
 				$GunPivot.rotation_degrees = +90
 			else:
 				$GunPivot.rotation_degrees = correct_rotation()
 		else:
 			$GunPivot.rotation_degrees = correct_rotation()
-		if Input.is_action_pressed("ui_right"):
+		if Input.is_action_pressed(c_right):
 			direction.x = 1
 			facing = 1
 			$GunPivot.rotation_degrees = correct_rotation()
 			motion.x = horizontalSpeed
-		elif Input.is_action_pressed("ui_left"):
+		elif Input.is_action_pressed(c_left):
 			direction.x = -1
 			facing = -1
 			$GunPivot.rotation_degrees = correct_rotation()
 			motion.x = -horizontalSpeed
 		else:
 			motion.x = 0
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed(c_jump):
 			if is_on_floor():
 				motion.y = verticalSpeed
-		if Input.is_action_just_released("jump"):
+		if Input.is_action_just_released(c_jump):
 			if motion.y < GRAVITY_SPEED:
 				motion.y = GRAVITY_SPEED
 		if direction == Vector2(0,0):

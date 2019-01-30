@@ -10,7 +10,8 @@ var player
 var finalscene
 var score1 = 0
 var score2 = 0
-
+var p1Control = "keyboard1"
+var p2Control = "gamepad1"
 var current_mode = "VS_CPU"
 
 func reset_score():

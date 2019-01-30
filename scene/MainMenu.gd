@@ -4,6 +4,7 @@ var scene_path_to_load
 
 func _ready():
 	get_tree().get_root().set_disable_input(false)
+	InputMap.load_from_globals()
 	$Menu/Button.grab_focus()
 	$Menu/Button.connect("pressed", self, "_on_Button_pressed", [$Menu/Button.scene_to_load])
 	Preloader.score1 = 0
@@ -53,12 +54,18 @@ func _on_Button2_pressed():
 
 func _on_KBvsController_pressed():
 	Preloader.current_mode = "KB_VS_CONTROLLER"
+	Preloader.p1Control = "keyboard1"
+	Preloader.p2Control = "gamepad1"
 
 func _on_ControllervsController_pressed():
 	Preloader.current_mode = "CONTROLLER_VS_CONTROLLER"
+	Preloader.p1Control = "gamepad1"
+	Preloader.p2Control = "gamepad2"
 
 func _on_KBvsKB_pressed():
 	Preloader.current_mode = "KB_VS_KB"
+	Preloader.p1Control = "keyboard1"
+	Preloader.p2Control = "keyboard2"
 
 func _on_Button4_pressed():
 	get_tree().get_root().set_disable_input(true)
@@ -66,3 +73,7 @@ func _on_Button4_pressed():
 	$FadeIn.fade_in()
 	yield(get_tree().create_timer(0.4), 'timeout')
 	get_tree().quit()
+
+func _on_Button5_pressed():
+	$Instructions.visible = true
+	$Menu.visible = false

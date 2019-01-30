@@ -3,7 +3,7 @@
 [ext_resource path="res://scene/Game.gd" type="Script" id=1]
 [ext_resource path="res://scene/FadeIn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://font/FFFFORWA.TTF" type="DynamicFontData" id=3]
-[ext_resource path="res://sprite/rose_particle.png" type="Texture" id=4]
+[ext_resource path="res://sprite/flower.png" type="Texture" id=4]
 [ext_resource path="res://scene/ScreenShake.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprite/curtain.png" type="Texture" id=6]
 [ext_resource path="res://sprite/skybox-clear.png" type="Texture" id=7]
@@ -46,7 +46,7 @@ extents = Vector2( 180, 32 )
 custom_solver_bias = 0.0
 extents = Vector2( 180, 32 )
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 pause_mode = 2
 script = ExtResource( 1 )
@@ -72,7 +72,6 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="WinnerScreen" type="Control" parent="UILayer" index="0"]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -88,7 +87,6 @@ _sections_unfolded = [ "Theme" ]
 
 [node name="HBoxContainer1" type="HBoxContainer" parent="UILayer/WinnerScreen" index="0"]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -153,41 +151,39 @@ size_flags_vertical = 1
 
 [node name="Node" type="Node2D" parent="UILayer/WinnerScreen/HBoxContainer1/RoundMarkers" index="0"]
 
+visible = false
+
 [node name="Sprite" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer1/RoundMarkers" index="1"]
 
 visible = false
-position = Vector2( 44.7932, 110.374 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 57.8073, 113.122 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Sprite2" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer1/RoundMarkers" index="2"]
 
 visible = false
-position = Vector2( 120.603, 107.284 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 170.66, 112.428 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Animation", "Offset" ]
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
 
 [node name="Sprite3" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer1/RoundMarkers" index="3"]
 
 visible = false
-position = Vector2( 198.95, 107.087 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 280.73, 110.517 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Sprite4" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer1/RoundMarkers" index="4"]
 
 visible = false
 position = Vector2( 277.596, 104.829 )
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/WinnerScreen" index="1"]
 
@@ -244,8 +240,6 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 134.0
-margin_right = 134.0
 margin_bottom = 240.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -259,29 +253,26 @@ size_flags_vertical = 1
 [node name="Sprite" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer2/RoundMarkers" index="1"]
 
 visible = false
-position = Vector2( 37.783, 110.596 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 59.4315, 110.596 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 
 [node name="Sprite2" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer2/RoundMarkers" index="2"]
 
 visible = false
-position = Vector2( 117.278, 107.757 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 171.05, 111.947 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Animation", "Offset" ]
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
 
 [node name="Sprite3" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer2/RoundMarkers" index="3"]
 
 visible = false
-position = Vector2( 196.15, 106.46 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 284.141, 112.047 )
 texture = ExtResource( 4 )
 flip_h = true
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Sprite4" type="Sprite" parent="UILayer/WinnerScreen/HBoxContainer2/RoundMarkers" index="4"]
 
@@ -566,7 +557,6 @@ shape = SubResource( 5 )
 
 [node name="WrapAreaE" type="Area2D" parent="." index="5"]
 
-editor/display_folded = true
 position = Vector2( 1100, 270 )
 scale = Vector2( 1, 8.46875 )
 input_pickable = true
@@ -587,7 +577,6 @@ shape = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="6"]
 
-editor/display_folded = true
 position = Vector2( 510, 290 )
 anchor_mode = 1
 rotating = false
